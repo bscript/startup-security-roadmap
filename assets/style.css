@@ -311,6 +311,8 @@ footer.site { margin-top: 64px; border-top: 1px solid var(--rule); background: v
 footer.site .gutter { padding-block: 28px 40px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px 40px; font-size: 13.5px; color: var(--ink-2); }
 footer.site h4 { margin: 0 0 6px; font-family: var(--font-mono); font-size: 11.5px; font-weight: 500; color: var(--muted); letter-spacing: .04em; }
 footer.site p + p { margin-top: 8px; }
+.visits { font-family: var(--font-mono); font-size: 12.5px; color: var(--muted); }
+.visits b { color: var(--ink); font-weight: 500; }
 .reset { border: 1px solid var(--rule-strong); background: transparent; border-radius: 6px; padding: 4px 10px; font-size: 13px; cursor: pointer; margin-top: 10px; }
 .reset.confirm { border-color: #C4341F; color: #C4341F; }
 

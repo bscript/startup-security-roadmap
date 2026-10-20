@@ -390,5 +390,16 @@ $("resetBtn").addEventListener("click", () => {
 });
 
 if (REPO_URL) { $("ghLink").href = REPO_URL; $("ghLink").hidden = false; }
+
+// Public visitor count from GoatCounter. Needs "Allow adding visitor counts on your website" turned on in GoatCounter.
+// Stays hidden until the count reaches VISITS_MIN, or if the request fails.
+const VISITS_URL = "https://bscript.goatcounter.com/counter/TOTAL.json";
+const VISITS_MIN = 100;
+if (location.hostname.endsWith("github.io")) {
+  fetch(VISITS_URL).then(r => r.ok ? r.json() : null).then(d => {
+    const n = d ? Number(String(d.count).replace(/\D/g, "")) : 0;
+    if (n >= VISITS_MIN) { $("visits").innerHTML = `<b>${n.toLocaleString("en")}</b> visitors so far`; $("visits").hidden = false; }
+  }).catch(() => {});
+}
 if (load("ssr.weekOpen", true) === false) $("week").open = false;
 syncTopbar(); renderFilters(); renderTypeSeg(); route();
