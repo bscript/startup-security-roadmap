@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Startup Security Roadmap</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="What a startup's first security engineer should do in year one: a roadmap across code, cloud, access, GDPR, vendors, incident response and AI, with tools and SOC 2 / ISO 27001 mappings.">
+<meta property="og:title" content="Startup Security Roadmap">
+<meta property="og:description" content="Year one for a startup's first security engineer: what to do, in what order, with which tools.">
+<!-- After GitHub Pages is live, change og-image.png to the full URL, e.g. https://USER.github.io/REPO/og-image.png -->
+<meta property="og:image" content="og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<script>var t = "light"; try { t = localStorage.getItem("ssr.theme") || "light"; } catch (e) {} if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,500..800&family=JetBrains+Mono:wght@400;500&family=Public+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="gutter">
+    <a class="brand" href="#roadmap">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><rect x="6" y="6" width="5" height="5" fill="currentColor"/><rect x="13" y="6" width="5" height="5" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="6" y="13" width="5" height="5" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="13" y="13" width="5" height="5" fill="currentColor"/></svg>
+      Startup Security Roadmap
+    </a>
+    <nav class="tabs" aria-label="Sections">
+      <a href="#roadmap" data-tab="roadmap">Roadmap</a>
+      <a href="#maturity" data-tab="maturity">Maturity</a>
+      <a href="#tools" data-tab="tools">Tools</a>
+    </nav>
+    <div class="top-right">
+      <span class="progress-mini" title="Items you've marked done"><span id="pmText">0 / 0</span><span class="track"><i id="pmBar"></i></span></span>
+      <div class="seg" role="group" aria-label="Theme">
+        <button data-theme-btn="light" aria-pressed="true">Light</button>
+        <button data-theme-btn="dark" aria-pressed="false">Dark</button>
+        <button data-theme-btn="auto" aria-pressed="false">Auto</button>
+      </div>
+      <a class="gh" id="ghLink" href="#" hidden>GitHub</a>
+    </div>
+  </div>
+</header>
+
+<main class="gutter">
+  <!-- Roadmap -->
+  <div id="view-roadmap" data-view="roadmap">
+    <section class="hero">
+      <span class="kicker">A field guide for year one</span>
+      <h1>What a startup needs from its <span class="band">first security engineer</span></h1>
+      <p>Everything to build in year one, in order. Click any item for the steps and tools.</p>
+      <div class="stats" id="stats"></div>
+    </section>
+
+    <details class="week" id="week" open>
+      <summary>
+        <span class="week-title">Only have a week? Start here.</span>
+        <span class="week-sub">Ten jobs that close the most common ways startups get breached.</span>
+        <span class="week-toggle" aria-hidden="true"></span>
+      </summary>
+      <div class="week-days" id="weekDays"></div>
+    </details>
+
+    <div class="section-head" id="roadmapHead">
+      <h2>The roadmap</h2>
+      <div class="head-actions">
+        <div class="export">
+          <button class="btn" id="csvBtn">Download CSV</button>
+          <button class="btn" id="mdBtn">Copy as Markdown</button>
+          <span class="export-note" id="exportNote" aria-live="polite"></span>
+        </div>
+        <div class="seg" role="group" aria-label="Layout" id="layoutSeg">
+          <button id="lyMatrix" aria-pressed="true">Table</button>
+          <button id="lyList" aria-pressed="false">By phase</button>
+        </div>
+      </div>
+    </div>
+
+    <section class="filters" aria-label="Filter the roadmap">
+      <div class="f-row">
+        <label class="f-field"><span>Company size</span>
+          <select id="sizeSel"></select>
+        </label>
+        <label class="f-field"><span>Domain</span>
+          <select id="laneSel"></select>
+        </label>
+        <div class="f-field"><span>Priority</span>
+          <div class="seg" role="group" aria-label="Priority">
+            <button data-pri="all" aria-pressed="true">All</button>
+            <button data-pri="must" aria-pressed="false">Must</button>
+            <button data-pri="should" aria-pressed="false">Should</button>
+            <button data-pri="could" aria-pressed="false">Could</button>
+          </div>
+        </div>
+        <label class="f-field f-grow"><span>Search</span>
+          <input id="q" class="search" type="search" placeholder="GDPR, Terraform, 8.24…">
+        </label>
+      </div>
+      <div class="f-row">
+        <div class="f-field f-grow"><span>What's driving this? Pick any</span>
+          <div class="chips" id="trigChips"></div>
+        </div>
+      </div>
+      <div class="f-foot">
+        <p class="profile-sum" id="profileSum"></p>
+        <label class="hide-toggle" for="hideOther"><input type="checkbox" id="hideOther"> Hide what doesn't apply</label>
+        <div class="legend"><span><i class="sq must"></i>Must</span><span><i class="sq"></i>Should</span><span><i class="sq could"></i>Could</span></div>
+      </div>
+    </section>
+
+    <div id="matrixWrap" class="table-wrap"><div class="matrix" id="matrix"></div></div>
+    <div id="listWrap" hidden></div>
+
+    <section class="how" aria-labelledby="howTitle">
+      <div class="section-head"><h2 id="howTitle">How the work moves</h2><p>The roadmap is the order you first build things in. After month 12 the same loop keeps running.</p></div>
+      <div class="loop">
+        <div><span class="step">01 Find</span><h3>Discover</h3><p>Inventory, scans, data maps, vendor lists, pentest results, incidents.</p></div>
+        <div><span class="step">02 Rank</span><h3>Triage</h3><p>Each gap becomes a ticket with a severity, an owner and a due date.</p></div>
+        <div><span class="step">03 Fix</span><h3>Fix, then guard</h3><p>Fix it, then add a CI check, policy or process so it can't come back.</p></div>
+        <div><span class="step">04 Prove</span><h3>Verify</h3><p>Retest, collect evidence for the audit, show customers.</p></div>
+        <div><span class="step">05 Watch</span><h3>Monitor</h3><p>Alerts, access reviews, metrics. New signals go back to 01.</p></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Maturity -->
+  <div id="view-maturity" data-view="maturity" hidden>
+    <div class="section-head" style="margin-top:0">
+      <div>
+        <span class="kicker">Based on what you've ticked</span>
+        <h2>How mature is the program?</h2>
+      </div>
+      <p>Tier names follow NIST CSF 2.0. A program is only as mature as its weakest domain. This is a guide, not an assessment.</p>
+    </div>
+    <div id="matrixMat"></div>
+  </div>
+
+  <!-- Tools -->
+  <div id="view-tools" data-view="tools" hidden>
+    <div class="section-head" style="margin-top:0">
+      <div>
+        <span class="kicker">Open source, free tiers and paid</span>
+        <h2>Tools by job</h2>
+      </div>
+      <p>You don't need most of these. Pick one per job, start with what's free or built in, and pay when the free option stops scaling. Listing is not an endorsement; check prices yourself.</p>
+    </div>
+    <div class="toolbar">
+      <div class="seg" role="group" aria-label="Tool type" id="typeSeg"></div>
+      <input id="tq" class="search" type="search" placeholder="Search tools" aria-label="Search tools">
+    </div>
+    <div class="tools-layout">
+      <nav class="cat-nav" id="catNav" aria-label="Tool categories"></nav>
+      <div id="toolList"></div>
+    </div>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="gutter">
+    <div>
+      <h4>About</h4>
+      <p>A practical plan for the first security hire at a SaaS startup. Timings assume one security engineer with help from platform engineers.</p>
+      <p>Progress ticks stay in your browser. Nothing is sent anywhere.</p>
+      <button class="reset" id="resetBtn">Clear my ticks</button>
+    </div>
+    <div>
+      <h4>References</h4>
+      <p>SOC 2 = AICPA Trust Services Criteria (CC common, A availability, C confidentiality, P privacy). ISO = ISO/IEC 27001:2022 Annex A. GDPR article numbers where the work is a legal duty.</p>
+    </div>
+    <div>
+      <h4>Contribute</h4>
+      <p>Spotted something wrong or missing? Items live in <span class="mono">assets/data.js</span> and tools in <span class="mono">assets/tools.js</span>. Pull requests welcome.</p>
+    </div>
+  </div>
+</footer>
+
+<div class="scrim" id="scrim" hidden></div>
+<aside class="drawer" id="drawer" hidden role="dialog" aria-modal="true" aria-labelledby="dTitle"></aside>
+
+<script src="assets/data.js"></script>
+<script src="assets/tools.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>
