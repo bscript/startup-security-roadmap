@@ -2,6 +2,8 @@
 
 What a startup needs from its first security engineer, laid out as a year-one plan you can click through.
 
+**Live site: https://bscript.github.io/startup-security-roadmap/**
+
 - **First week**: ten jobs to do in your first five days.
 - **Roadmap**: 73 pieces of work across 10 domains (governance, code and CI/CD, cloud, identity, data and GDPR, vendors and subprocessors, detection and response, testing, people, product and AI security), in five phases from the first 30 days to ongoing work. Filter by company size and what's driving the work (enterprise deals, an audit, EU personal data, AI features, Gmail or Microsoft 365 APIs), then export what applies as CSV for Linear or Jira, or as Markdown. Each item has the steps, what you hand over, tools to look at, and the SOC 2 and ISO 27001:2022 controls it covers.
 - **Maturity**: tick off what you've done and see a tier per domain, using the NIST CSF 2.0 tier names.

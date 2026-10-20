@@ -1,5 +1,5 @@
 // Set this to your repo URL to show a GitHub link in the top bar.
-const REPO_URL = "";
+const REPO_URL = "https://github.com/bscript/startup-security-roadmap";
 
 const byId = Object.fromEntries(ITEMS.map(i => [i.id, i]));
 const laneById = Object.fromEntries(LANES.map(l => [l.id, l]));
